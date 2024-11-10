@@ -1,4 +1,14 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UsePipes,
+  ValidationPipe,
+} from '@nestjs/common';
 import { ConfessionsService } from './confessions.service';
 import { CreateConfessionDto } from './dto/create-confession.dto';
 import { UpdateConfessionDto } from './dto/update-confession.dto';
@@ -8,6 +18,7 @@ export class ConfessionsController {
   constructor(private readonly confessionsService: ConfessionsService) {}
 
   @Post()
+  @UsePipes(ValidationPipe)
   create(@Body() createConfessionDto: CreateConfessionDto) {
     return this.confessionsService.create(createConfessionDto);
   }
@@ -23,7 +34,11 @@ export class ConfessionsController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateConfessionDto: UpdateConfessionDto) {
+  @UsePipes(ValidationPipe)
+  update(
+    @Param('id') id: string,
+    @Body() updateConfessionDto: UpdateConfessionDto,
+  ) {
     return this.confessionsService.update(+id, updateConfessionDto);
   }
 

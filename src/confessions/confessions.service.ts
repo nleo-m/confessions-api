@@ -13,7 +13,7 @@ export class ConfessionsService {
   ) {}
 
   create(createConfessionDto: CreateConfessionDto) {
-    return this.confessionsRepository.insert(createConfessionDto);
+    return this.confessionsRepository.save(createConfessionDto);
   }
 
   findAll(): Promise<Confession[]> {
