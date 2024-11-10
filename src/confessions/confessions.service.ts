@@ -13,7 +13,7 @@ export class ConfessionsService {
   ) {}
 
   create(createConfessionDto: CreateConfessionDto) {
-    return 'This action adds a new confession';
+    return this.confessionsRepository.insert(createConfessionDto);
   }
 
   findAll(): Promise<Confession[]> {
@@ -21,14 +21,18 @@ export class ConfessionsService {
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} confession`;
+    return this.confessionsRepository.findOne({ where: { id: id } });
   }
 
   update(id: number, updateConfessionDto: UpdateConfessionDto) {
-    return `This action updates a #${id} confession`;
+    return this.confessionsRepository.update(id, updateConfessionDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} confession`;
+  async remove(id: number) {
+    const confession = await this.confessionsRepository.findOne({
+      where: { id: id },
+    });
+
+    return this.confessionsRepository.remove(confession);
   }
 }
