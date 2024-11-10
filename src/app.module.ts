@@ -5,6 +5,7 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfessionsModule } from './confessions/confessions.module';
 import { Confession } from './confessions/entities/confession.entity';
+import { UsersModule } from './users/users.module';
 import typeorm from './database/config/typeorm';
 
 @Module({
@@ -24,6 +25,7 @@ import typeorm from './database/config/typeorm';
       // synchronize: true,
     }),
     ConfessionsModule,
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],
