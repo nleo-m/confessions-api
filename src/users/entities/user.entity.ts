@@ -1,4 +1,11 @@
-import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert } from 'typeorm';
+import { hashPassword } from 'src/utils/hashPassword';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  BeforeInsert,
+  BeforeUpdate,
+} from 'typeorm';
 
 @Entity({ name: 'users' })
 export class User {
@@ -14,9 +21,16 @@ export class User {
   @Column()
   password: string;
 
-  @Column()
+  @Column({ nullable: true })
   name: string;
 
-  @Column()
+  @Column({ nullable: true })
   bio: string;
+
+  @BeforeInsert()
+  @BeforeUpdate()
+  async handlePassword() {
+    console.log('pass: ', this.password);
+    this.password = await hashPassword(this.password);
+  }
 }

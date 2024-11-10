@@ -21,6 +21,7 @@ export class CreateTableUsers1731277986489 implements MigrationInterface {
           {
             name: 'name',
             type: 'varchar',
+            isNullable: true,
           },
           {
             name: 'email',
@@ -34,6 +35,7 @@ export class CreateTableUsers1731277986489 implements MigrationInterface {
           {
             name: 'bio',
             type: 'varchar',
+            isNullable: true,
           },
         ],
       }),

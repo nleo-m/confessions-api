@@ -1,3 +1,4 @@
+import typeorm from './database/config/typeorm';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
@@ -6,7 +7,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfessionsModule } from './confessions/confessions.module';
 import { Confession } from './confessions/entities/confession.entity';
 import { UsersModule } from './users/users.module';
-import typeorm from './database/config/typeorm';
+import { User } from './users/entities/user.entity';
 
 @Module({
   imports: [
@@ -21,7 +22,7 @@ import typeorm from './database/config/typeorm';
       username: process.env.DB_USER,
       password: process.env.DB_PASSWD,
       database: process.env.DB_ID,
-      entities: [Confession],
+      entities: [Confession, User],
       // synchronize: true,
     }),
     ConfessionsModule,
